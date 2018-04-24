@@ -1,0 +1,7 @@
+.ipynb_checkpoints
+*DS_Store*
+weather-zh
+weather-ch-demo
+.gitlab-project-data.json
+.idea/
+.venv/

@@ -1,0 +1,7 @@
+jupyter
+matplotlib
+notebook
+numpy
+pandas
+-e git+https://github.com/SwissDataScienceCenter/renga-python.git@development#egg=renga
+seaborn

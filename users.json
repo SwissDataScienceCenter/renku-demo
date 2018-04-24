@@ -1,0 +1,16 @@
+[
+  {
+    "username": "cramakri",
+    "name": "Chandrasekhar Ramakrishnan",
+    "email": "cramakri@ethz.ch",
+    "password": "cramakri",
+    "skip_confirmation": "true"
+  },
+  {
+    "username": "ableuler",
+    "name": "Andreas Bleuler",
+    "email": "andreas.bleuler@sdsc.ethz.ch",
+    "password": "ableuler",
+    "skip_confirmation": "true"
+  }
+]
