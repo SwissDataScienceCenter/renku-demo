@@ -11,4 +11,7 @@ automated. Simply run the `run-demo.sh` command. The command assumes a local ins
 GitLab running under `gitlab.renga.build`, yet it is configurable to run with different 
 instances of GitLab as a backend through environment variables. The script `cleanup.sh`
 will remove everything created by the `run-demo.sh` script, both locally as well as 
-on the GitLab backend.
+on the GitLab backend. The details (username, password) of the created users can be found 
+and adapted in `users.json`.
+
+#### Note that the users are currently created in the GitLab database only and not in Keycloak when running the autmated setup. This means that the `Renga Login` does not work for these users.
