@@ -1,16 +1,16 @@
 [
   {
     "username": "cramakri",
-    "name": "Chandrasekhar Ramakrishnan",
+    "firstName": "Chandrasekhar",
+    "lastName": "Ramakrishnan",
     "email": "cramakri@ethz.ch",
-    "password": "cramakri",
-    "skip_confirmation": "true"
+    "password": "cramakri"
   },
   {
     "username": "ableuler",
-    "name": "Andreas Bleuler",
+    "firstName": "Andreas",
+    "lastName": "Bleuler",
     "email": "andreas.bleuler@sdsc.ethz.ch",
-    "password": "ableuler",
-    "skip_confirmation": "true"
+    "password": "ableuler"
   }
 ]

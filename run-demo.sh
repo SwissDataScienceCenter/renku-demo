@@ -20,17 +20,17 @@
 
 set -e
 
-#export KEYCLOAK_URL=${KEYCLOAK_URL:-http://keycloak.renga.build:8080}
-#export KEYCLOAK_ADMIN_USER=${KEYCLOAK_ADMIN_USER:-admin}
-#export KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
+export KEYCLOAK_URL=${KEYCLOAK_URL:-http://keycloak.renga.build:8080}
+export KEYCLOAK_ADMIN_USER=${KEYCLOAK_ADMIN_USER:-admin}
+export KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
 export GITLAB_URL=${GITLAB_URL:-http://gitlab.renga.build}
 export GITLAB_SUDO_TOKEN=${GITLAB_SUDO_TOKEN:-dummy-secret}
 
 echo ==================================
 echo Using the following env variables:
-#echo Keycloak URL: $KEYCLOAK_URL
-#echo Keycloak admin user: $KEYCLOAK_ADMIN_USER
-#echo Keycloak admin password: $KEYCLOAK_ADMIN_PASSWORD
+echo Keycloak URL: $KEYCLOAK_URL
+echo Keycloak admin user: $KEYCLOAK_ADMIN_USER
+echo Keycloak admin password: $KEYCLOAK_ADMIN_PASSWORD
 echo GitLab URL: $GITLAB_URL
 echo GitLab sudo token: $GITLAB_SUDO_TOKEN
 echo ==================================
@@ -53,7 +53,11 @@ python steps/create-project.py
 # from the json file using python.
 export REMOTE_REPO_URL=$(python -c \
     "import json; print(json.load(open('.gitlab-project-data.json'))['project']['ssh_url_to_repo'])")
-export PRIMARY_USER_NAME=$(python -c "import json; print(json.load(open('users.json'))[0]['name'])")
+export PRIMARY_USER_NAME=$(python -c "
+import json;
+user = json.load(open('users.json'))[0];
+print('{0} {1}'.format(user['firstName'], user['lastName']))
+")
 export PRIMARY_USER_EMAIL=$(python -c "import json; print(json.load(open('users.json'))[0]['email'])")
 
 bash steps/initialize-repo.sh
