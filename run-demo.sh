@@ -36,7 +36,7 @@ echo GitLab sudo token: $GITLAB_SUDO_TOKEN
 echo ==================================
 
 
-bash steps/check-packages.sh
+bash steps/1-check-packages.sh
 
 # If the necessary software is around, we create a new virtualenv, activate it and install the requirements.
 virtualenv -p python3 .venv
@@ -45,9 +45,9 @@ echo -n Installing python packages...
 pip install -q -r requirements.txt
 echo done.
 
-python steps/create-users.py
+python steps/2-create-users.py
 
-python steps/create-project.py
+python steps/3-create-project.py
 
 # Read the remote repository URL, and username/email of the primary user
 # from the json file using python.
@@ -60,17 +60,17 @@ print('{0} {1}'.format(user['firstName'], user['lastName']))
 ")
 export PRIMARY_USER_EMAIL=$(python -c "import json; print(json.load(open('users.json'))[0]['email'])")
 
-bash steps/initialize-repo.sh
+bash steps/4-initialize-repo.sh
 
-bash steps/implement-reader/commit.sh
-python steps/implement-reader/ku.py
+bash steps/implement-reader/5-commit.sh
+python steps/implement-reader/6-ku.py
 
 
-bash steps/preprocess-data/commit.sh
-python steps/preprocess-data/ku.py
+bash steps/preprocess-data/7-commit.sh
+python steps/preprocess-data/8-ku.py
 
-bash steps/analyze-data/commit.sh
-python steps/analyze-data/ku.py
+bash steps/analyze-data/9-commit.sh
+python steps/analyze-data/10-ku.py
 
 
 echo Demo project setup was successful
