@@ -28,5 +28,5 @@ git add -A src/
 git add ./notebooks/PreprocessData.ipynb
 git commit -m "Work on Ku Preprocess Data"
 pip install -e src/python/weather-ch
-renga run python -m weather_ch preprocess data/zh/homog_mo_SMA.txt data/zh/standardized.csv
+renku run python -m weather_ch preprocess data/zh/homog_mo_SMA.txt data/zh/standardized.csv
 git push
