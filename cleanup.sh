@@ -18,10 +18,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-export KEYCLOAK_URL=${KEYCLOAK_URL:-http://keycloak.renga.build:8080}
+export KEYCLOAK_URL=${KEYCLOAK_URL:-http://keycloak.renku.build:8080}
 export KEYCLOAK_ADMIN_USER=${KEYCLOAK_ADMIN_USER:-admin}
 export KEYCLOAK_ADMIN_PASSWORD=${KEYCLOAK_ADMIN_PASSWORD:-admin}
-export GITLAB_URL=${GITLAB_URL:-http://gitlab.renga.build}
+export GITLAB_URL=${GITLAB_URL:-http://gitlab.renku.build}
 export GITLAB_SUDO_TOKEN=${GITLAB_SUDO_TOKEN:-dummy-secret}
 
 echo ==================================

@@ -19,7 +19,7 @@
 # limitations under the License.
 
 mkdir weather-zh
-renga init weather-zh
+renku init weather-zh
 cd weather-zh
 
 git commit --amend --no-edit --author="$PRIMARY_USER_NAME <$PRIMARY_USER_EMAIL>"
@@ -30,8 +30,8 @@ git config user.name "$PRIMARY_USER_NAME"
 curl https://www.gitignore.io/api/macos,python,R,linux >> .gitignore
 git commit -am "Updated gitignore using gitignore.io"
 
-renga dataset create zh
-renga dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
+renku dataset create zh
+renku dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
 
 cp ../demo-script/commits/01/README.md ./
 git add .

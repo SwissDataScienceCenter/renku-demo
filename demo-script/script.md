@@ -52,10 +52,10 @@ Switch back to user cramakri for the rest of the script.
 
 ```
 mkdir weather-zh
-renga init weather-zh
+renku init weather-zh
 cd weather-zh
-renga dataset create zh
-renga dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
+renku dataset create zh
+renku dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
 ```
 
 ## Add Readme
@@ -65,7 +65,7 @@ The text is in ```commits/01/README.md```.
 ## Commit / Push
 
 ```
-git remote add origin ssh://git@gitlab.renga.build:5022/cramakri/weather-zh.git
+git remote add origin ssh://git@gitlab.renku.build:5022/cramakri/weather-zh.git
 
 git add .
 git commit -m"Added readme"
@@ -90,7 +90,7 @@ Locally:
 - Add the new files to git and commit with message "Work on Ku Preprocess Data" and push to server
 - Run the command:
 ```
-renga run python -m weather_ch preprocess data/zh/homog_mo_SMA.txt data/zh/standardized.csv
+renku run python -m weather_ch preprocess data/zh/homog_mo_SMA.txt data/zh/standardized.csv
 ```
 - Push updates to server
 
@@ -123,9 +123,9 @@ In UI:
 ```
 mkdir weather-ch-demo
 cd weather-ch-demo
-renga init --no-external-storage
-renga dataset create zh
-renga dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
+renku init --no-external-storage
+renku dataset create zh
+renku dataset add zh http://www.meteoschweiz.admin.ch/product/output/climate-data/homogenous-monthly-data-processing/data/homog_mo_SMA.txt
 ```
 
 2. show the directory structure and the data
@@ -139,14 +139,14 @@ head -n 30 data/zh/homog_mo_SMA.txt
 
 ```
 tail -n +27 data/zh/homog_mo_SMA.txt | less
-renga run tail -n +27 data/zh/homog_mo_SMA.txt > data/zh/no-header.txt
+renku run tail -n +27 data/zh/homog_mo_SMA.txt > data/zh/no-header.txt
 ```
 
 4. show the logs
 
 ```
 git log --oneline
-renga log data/zh/no-header.txt
+renku log data/zh/no-header.txt
 ```
 
 
@@ -163,5 +163,5 @@ data = pd.read_table('../data/zh/no-header.txt', sep='\s+')
 
 8. add git remote and push
 
-9. show the project on the Renga UI / then switch the the more complete
+9. show the project on the Renku UI / then switch the the more complete
 `weather-ch` project to show other functionality

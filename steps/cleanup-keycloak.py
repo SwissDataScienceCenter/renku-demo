@@ -54,7 +54,7 @@ with open('users.json', 'r') as f:
 for user in users:
 
     # Get the id(s) of the user(s) with the given username.
-    response = requests.get(keycloak_url + '/auth/admin/realms/Renga/users',
+    response = requests.get(keycloak_url + '/auth/admin/realms/Renku/users',
                              params={'username': user['username']},
                              headers=keycloak_headers)
 
@@ -67,7 +67,7 @@ for user in users:
         exit(1)
 
     for id in ids:
-        response = requests.delete(keycloak_url + '/auth/admin/realms/Renga/users/{0}'.format(id),
+        response = requests.delete(keycloak_url + '/auth/admin/realms/Renku/users/{0}'.format(id),
                                    headers=keycloak_headers)
 
         if response.status_code >= 300:

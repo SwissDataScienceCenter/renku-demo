@@ -74,7 +74,7 @@ for user in users:
     kc_post_user['emailVerified'] = True
     kc_post_user['enabled'] = True
 
-    response = requests.post(keycloak_url + '/auth/admin/realms/Renga/users',
+    response = requests.post(keycloak_url + '/auth/admin/realms/Renku/users',
                              data=json.dumps(kc_post_user),
                              headers=keycloak_headers)
 
@@ -90,7 +90,7 @@ for user in users:
     # Feels a bit stupid, don't know why keycloak doesn't
     # include it in the response to the POST request...?
 
-    response = requests.get(keycloak_url + '/auth/admin/realms/Renga/users',
+    response = requests.get(keycloak_url + '/auth/admin/realms/Renku/users',
                              params={'username': user['username']},
                              headers=keycloak_headers)
 
@@ -111,7 +111,7 @@ for user in users:
         'value': user['password']
     }
 
-    response = requests.put(keycloak_url + '/auth/admin/realms/Renga/users/{0}/reset-password'.format(user['keycloak_id']),
+    response = requests.put(keycloak_url + '/auth/admin/realms/Renku/users/{0}/reset-password'.format(user['keycloak_id']),
                              data=json.dumps(kc_user_credentials),
                              headers=keycloak_headers)
     if response.status_code >= 300:
