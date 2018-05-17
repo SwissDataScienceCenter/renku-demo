@@ -20,7 +20,6 @@ import requests
 import os
 import json
 
-
 gitlab_url = os.environ.get('GITLAB_URL')
 gitlab_sudo_token = os.environ.get('GITLAB_SUDO_TOKEN')
 
@@ -35,50 +34,85 @@ with open('users.json', 'r') as f:
 # Create the weather-zh project as primary user, star it, add secondary user as developer
 headers['Sudo'] = users[0]['username']
 
-project_data = {
-    'name': 'weather-zh',
-    'description': 'An investigation into weather trends in Zürich, Switzerland.',
-    'visibility': 'public',
-    'tag_list': 'linear models, python, weather',
-}
+# check if the project already exists before trying to create it
+projects = requests.get(
+    gitlab_url + '/api/v4/users/{0}/projects'.format(users[0]['username'])
+).json()
 
-response = requests.post(gitlab_url + '/api/v4/projects/', data=project_data, headers=headers)
-
-if response.status_code == 201:
-    project_data['id'] = response.json()['id']
-    project_data['ssh_url_to_repo'] = response.json()['ssh_url_to_repo']
+for project_data in projects:
+    if project_data['name'] == 'weather-zh':
+        print('\nProject already created.')
+        break
 else:
-    print('\nProblem creating project weather-zh')
-    print(response.text)
-    print('Aborting...\n')
-    exit(1)
+    project_data = {
+        'name':
+            'weather-zh',
+        'description':
+            'An investigation into weather trends in Zürich, Switzerland.',
+        'visibility':
+            'public',
+        'tag_list':
+            'linear models, python, weather',
+    }
 
+    response = requests.post(
+        gitlab_url + '/api/v4/projects/', data=project_data, headers=headers
+    )
 
-requests.post(gitlab_url + '/api/v4/projects/{0}/star'.format(project_data['id']), headers=headers)
+    if response.status_code == 201:
+        project_data['id'] = response.json()['id']
+        project_data['ssh_url_to_repo'] = response.json()['ssh_url_to_repo']
+    else:
+        print('\nProblem creating project weather-zh')
+        print(response.text)
+        print('Aborting...\n')
+        exit(1)
 
-# Get id of secondary user
-response = requests.get(
-    gitlab_url + '/api/v4/users/',
-    headers=headers,
-    params={'username': users[1]['username']}
-)
-project_member = {
-    'user_id': response.json()[0]['id'],
-    'access_level': 30,
-}
-
-response = requests.post(
-    gitlab_url + '/api/v4/projects/{0}/members'.format(project_data['id']),
-    data=project_member,
+requests.post(
+    gitlab_url + '/api/v4/projects/{0}/star'.format(project_data['id']),
     headers=headers
 )
 
-if response.status_code != 201:
-    print('\nProblem adding secondary user as developer')
-    print(response.text)
-    print('Aborting...\n')
-    exit(1)
+# Get id of secondary user
+developer = requests.get(
+    gitlab_url + '/api/v4/users/',
+    headers=headers,
+    params={
+        'username': users[1]['username']
+    }
+).json()[0]
 
+project_members = requests.get(
+    gitlab_url + '/api/v4/projects/{0}/users'.format(project_data['id']),
+    headers=headers
+).json()
+
+if any(
+    member['username'] == developer['username'] for member in project_members
+):
+    print(
+        '\nUser {0} is already a member of project {1}'.format(
+            developer['username'], project_data['name']
+        )
+    )
+
+else:
+    project_member = {
+        'user_id': developer['id'],
+        'access_level': 30,
+    }
+
+    response = requests.post(
+        gitlab_url + '/api/v4/projects/{0}/members'.format(project_data['id']),
+        data=project_member,
+        headers=headers
+    )
+
+    if response.status_code != 201:
+        print('\nProblem adding secondary user as developer')
+        print(response.text)
+        print('Aborting...\n')
+        exit(1)
 
 # Create two kus as secondary user
 headers['Sudo'] = users[1]['username']
@@ -113,4 +147,3 @@ with open('.gitlab-project-data.json', 'w') as f:
         'ku1': ku1,
         'ku2': ku2,
     }, f)
-
