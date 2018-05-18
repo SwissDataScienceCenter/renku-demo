@@ -3,5 +3,5 @@ matplotlib
 notebook
 numpy
 pandas
--e git+https://github.com/SwissDataScienceCenter/renku-python.git@development#egg=renku
+-e git+https://github.com/SwissDataScienceCenter/renku-python.git@master#egg=renku
 seaborn
