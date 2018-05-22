@@ -178,12 +178,6 @@ for user in users:
         if response.status_code == 201:
             user['id'] = response.json()['id']
 
-        # Actually one could recover from this, but I'm too lazy for this now.
-        # elif response.status_code == 409:
-        #     print('\nProblem on creation of user {0}'.format(user['username']))
-        #     print(response.text)
-        #     print('Continuing anyway...\n')
-
         else:
             print(
                 '\nProblem on creation of user {0} in GitLab'.format(
