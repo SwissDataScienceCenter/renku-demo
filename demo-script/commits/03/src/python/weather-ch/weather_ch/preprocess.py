@@ -32,9 +32,15 @@ def standardize_df(df):
     center = df.groupby('Month')[['Temperature', 'Precipitation']].median()
 
     def standardize(x):
-        std = x.assign(Temperature=x['Temperature'] - center.loc[x.name, 'Temperature'])
-        std = std.assign(Precipitation=x['Precipitation'] - center.loc[x.name, 'Precipitation'])
+        std = x.assign(
+            Temperature=x['Temperature'] - center.loc[x.name, 'Temperature']
+        )
+        std = std.assign(
+            Precipitation=x['Precipitation'] -
+            center.loc[x.name, 'Precipitation']
+        )
         return std
+
     return df.groupby('Month').apply(standardize)
 
 

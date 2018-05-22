@@ -20,7 +20,6 @@ import requests
 import os
 import json
 
-
 gitlab_url = os.environ.get('GITLAB_URL')
 gitlab_sudo_token = os.environ.get('GITLAB_SUDO_TOKEN')
 
@@ -36,12 +35,15 @@ headers = {
 with open('.gitlab-project-data.json', 'r') as f:
     project_data = json.load(f)
 
-issue_url = gitlab_url + '/api/v4/projects/{0}/issues/{1}'.format(project_data['project']['id'], project_data['ku2']['iid'])
+issue_url = gitlab_url + '/api/v4/projects/{0}/issues/{1}'.format(
+    project_data['project']['id'], project_data['ku2']['iid']
+)
 
 ku_url = issue_url + '/notes'
 
 note_data = {
-    'body': 'See ![PreprocessData](notebooks/PreprocessData.ipynb) for the result of preprocessing the data.'
+    'body':
+        'See ![PreprocessData](notebooks/PreprocessData.ipynb) for the result of preprocessing the data.'
 }
 
 response = requests.post(ku_url, data=note_data, headers=headers)
@@ -50,7 +52,9 @@ if response.status_code != 201:
     print('Aborting...\n')
     exit(1)
 
-response = requests.put(issue_url, data={'state_event': 'close'}, headers=headers)
+response = requests.put(
+    issue_url, data={'state_event': 'close'}, headers=headers
+)
 if response.status_code != 200:
     print('\nProblem closing ku:', response.text)
     print('Aborting...\n')

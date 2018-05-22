@@ -28,12 +28,14 @@ from os.path import dirname
 
 import pytest
 
+
 @pytest.fixture(scope="session")
 def data_folder_path():
     """Path to the weather_ch data folder"""
     module_path = dirname(__file__)
     data_path = os.path.join(module_path, "..", "..", "..", "..", "data")
     return data_path
+
 
 @pytest.fixture(scope="session")
 def zh_data_file_path():

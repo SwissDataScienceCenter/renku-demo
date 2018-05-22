@@ -20,7 +20,6 @@ import requests
 import os
 import json
 
-
 gitlab_url = os.environ.get('GITLAB_URL')
 gitlab_sudo_token = os.environ.get('GITLAB_SUDO_TOKEN')
 
@@ -36,14 +35,14 @@ headers = {
 with open('.gitlab-project-data.json', 'r') as f:
     project_data = json.load(f)
 
-
 ku3 = {
     'title': 'Analyze Data',
     'description': 'Analyze data to understand weather trends',
 }
 
 response = requests.post(
-    gitlab_url + '/api/v4/projects/{0}/issues'.format(project_data['project']['id']),
+    gitlab_url +
+    '/api/v4/projects/{0}/issues'.format(project_data['project']['id']),
     data=ku3,
     headers=headers
 )
@@ -60,13 +59,13 @@ project_data['ku3'] = ku3
 with open('.gitlab-project-data.json', 'w') as f:
     json.dump(project_data, f)
 
-
 # Add a contribution to the new ku
 ku_url = gitlab_url + \
             '/api/v4/projects/{0}/issues/{1}/notes'.format(project_data['project']['id'], project_data['ku3']['iid'])
 
 note_data = {
-    'body': 'See ![Analysis](notebooks/Analysis.ipynb) for some thoughts on the analysis.'
+    'body':
+        'See ![Analysis](notebooks/Analysis.ipynb) for some thoughts on the analysis.'
 }
 
 response = requests.post(ku_url, data=note_data, headers=headers)

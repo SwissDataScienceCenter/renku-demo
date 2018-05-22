@@ -33,9 +33,11 @@ data = {
     'password': keycloak_admin_password,
     'grant_type': 'password'
 }
-response = requests.post(keycloak_url + '/auth/realms/master/protocol/openid-connect/token',
-                         data=data,
-                         headers={'Accept': 'application/json'})
+response = requests.post(
+    keycloak_url + '/auth/realms/master/protocol/openid-connect/token',
+    data=data,
+    headers={'Accept': 'application/json'}
+)
 if response.status_code >= 300:
     print('\nProblem obtaining an admin access token for keycloak.')
     exit(1)
@@ -46,7 +48,6 @@ keycloak_headers = {
     'Content-Type': 'application/json'
 }
 
-
 # Remove our two users and all their contributions
 with open('users.json', 'r') as f:
     users = json.load(f)
@@ -54,9 +55,11 @@ with open('users.json', 'r') as f:
 for user in users:
 
     # Get the id(s) of the user(s) with the given username.
-    response = requests.get(keycloak_url + '/auth/admin/realms/Renku/users',
-                             params={'username': user['username']},
-                             headers=keycloak_headers)
+    response = requests.get(
+        keycloak_url + '/auth/admin/realms/Renku/users',
+        params={'username': user['username']},
+        headers=keycloak_headers
+    )
 
     if response.status_code == 200:
         ids = [user['id'] for user in response.json()]
@@ -67,11 +70,17 @@ for user in users:
         exit(1)
 
     for id in ids:
-        response = requests.delete(keycloak_url + '/auth/admin/realms/Renku/users/{0}'.format(id),
-                                   headers=keycloak_headers)
+        response = requests.delete(
+            keycloak_url + '/auth/admin/realms/Renku/users/{0}'.format(id),
+            headers=keycloak_headers
+        )
 
         if response.status_code >= 300:
-            print('\nProblem deleting user {0} from keycloak with id {1}'.format(user['username'], id))
+            print(
+                '\nProblem deleting user {0} from keycloak with id {1}'.format(
+                    user['username'], id
+                )
+            )
             print(response.text)
             print('Aborting...\n')
             exit(1)

@@ -32,7 +32,7 @@ from weather_ch import reader
 def test_reader(zh_data_file_path):
     assert os.path.exists(zh_data_file_path)
     df = reader.read_data(zh_data_file_path)
-    assert df.loc[0,'Year'] == 1864
-    assert df.loc[0,'Month'] == 1
-    assert df.loc[0,'Temperature'] == -6.6
-    assert df.loc[0,'Precipitation'] == 25.7
+    assert df.loc[0, 'Year'] == 1864
+    assert df.loc[0, 'Month'] == 1
+    assert df.loc[0, 'Temperature'] == -6.6
+    assert df.loc[0, 'Precipitation'] == 25.7

@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # Apache Software License 2.0
 #
 # Copyright (c) 2018, Swiss Data Science Center (SDSC)
@@ -16,8 +15,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
-
 """weather_ch - Umbrella package for weather-ch."""
 
 from . import reader, preprocess
