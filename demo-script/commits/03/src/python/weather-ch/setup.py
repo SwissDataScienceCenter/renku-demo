@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-
 # Apache Software License 2.0
 #
 # Copyright (c) 2018, Swiss Data Science Center (SDSC)
@@ -17,10 +16,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
 from setuptools import find_packages, setup
 
-install_requires = [req.strip() for req in "numpy, scipy, pandas, jupyter, seaborn, matplotlib, statsmodels".split(',')]
+install_requires = [
+    req.strip() for req in
+    "numpy, scipy, pandas, jupyter, seaborn, matplotlib, statsmodels".
+    split(',')
+]
 
 tests_require = [
     'check-manifest>=0.25',
@@ -34,9 +36,7 @@ tests_require = [
 ]
 
 extras_require = {
-    'docs': [
-        'Sphinx>=1.5.1',
-    ],
+    'docs': ['Sphinx>=1.5.1', ],
     'tests': tests_require,
 }
 
@@ -44,20 +44,15 @@ setup(
     name="weather_ch",
     version="0.1.0",
     url="https://github.com/SwissDataScienceCenter/weather-ch",
-
     author="Swiss Data Science Center (SDSC)",
     author_email="contact@datascience.ch",
-
     description="Umbrella package for weather-ch.",
     long_description=open('README.rst').read(),
-
     packages=find_packages(),
     zip_safe=True,
-
     install_requires=install_requires,
     extras_require=extras_require,
     tests_require=['pytest'],
-
     classifiers=[
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.5',

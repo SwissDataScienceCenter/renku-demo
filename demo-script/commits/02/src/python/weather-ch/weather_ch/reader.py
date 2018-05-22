@@ -29,4 +29,6 @@ import pandas as pd
 
 def read_data(path_to_data):
     """Read data and return a pandas data frame."""
-    return pd.read_table(path_to_data, sep="\s+", skip_blank_lines=False, header=27)
+    return pd.read_table(
+        path_to_data, sep="\s+", skip_blank_lines=False, header=27
+    )

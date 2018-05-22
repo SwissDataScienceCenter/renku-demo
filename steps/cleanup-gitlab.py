@@ -23,17 +23,18 @@ import json
 gitlab_url = os.environ.get('GITLAB_URL')
 gitlab_sudo_token = os.environ.get('GITLAB_SUDO_TOKEN')
 
-headers = {
-    'Accept': 'application/json',
-    'Private-Token': gitlab_sudo_token
-}
+headers = {'Accept': 'application/json', 'Private-Token': gitlab_sudo_token}
 
 # Remove our two users and all their contributions
 with open('users.json', 'r') as f:
     users = json.load(f)
 
 for user in users:
-    response = requests.get(gitlab_url + '/api/v4/users', params={'username': user['username']}, headers=headers)
+    response = requests.get(
+        gitlab_url + '/api/v4/users',
+        params={'username': user['username']},
+        headers=headers
+    )
     if response.status_code >= 300:
         print('\nProblem getting id for user {0}'.format(user['username']))
         print(response.text)
