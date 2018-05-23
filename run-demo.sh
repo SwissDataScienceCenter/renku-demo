@@ -35,15 +35,23 @@ echo GitLab URL: $GITLAB_URL
 echo GitLab sudo token: $GITLAB_SUDO_TOKEN
 echo ==================================
 
+if [ -z "$DOCKER" ]; then
+    bash steps/1-check-packages.sh
 
-bash steps/1-check-packages.sh
+    # If the necessary software is around, we create a new virtualenv, activate it and install the requirements.
+    virtualenv -p python3 .venv
+    source ./.venv/bin/activate
+    echo -n Installing python packages...
+    pip install -q -r requirements.txt
+    echo done.
+fi
 
-# If the necessary software is around, we create a new virtualenv, activate it and install the requirements.
-virtualenv -p python3 .venv
-source ./.venv/bin/activate
-echo -n Installing python packages...
-pip install -q -r requirements.txt
-echo done.
+
+
+if ! [ -z "$DOCKER" ]; then
+    mkdir .ssh
+    ssh-keygen -t rsa -N "" -b 4096 -f ~/.ssh/id_rsa
+fi
 
 python steps/2-create-users.py
 

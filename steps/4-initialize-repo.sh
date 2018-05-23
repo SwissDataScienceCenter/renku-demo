@@ -37,5 +37,12 @@ cp ../demo-script/commits/01/README.md ./
 git add .
 git commit -m "Added readme"
 
+if ! [ -z "$DOCKER" ]; then
+    export GITLAB_PORT=`echo $REMOTE_REPO_URL | grep  -o '\:[0-9]*' | grep -o '[0-9]\+'`
+    export GITLAB_HOST=`echo $GITLAB_URL | sed -e 's/http\(s\)\{0,1\}\:\/\///g'`
+
+    ssh-keyscan -p $GITLAB_PORT $GITLAB_HOST >> ~/.ssh/known_hosts
+fi
+
 git remote add origin $REMOTE_REPO_URL
 git push --set-upstream origin master

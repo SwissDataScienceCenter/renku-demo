@@ -33,8 +33,9 @@ echo GitLab URL: $GITLAB_URL
 echo GitLab sudo token: $GITLAB_SUDO_TOKEN
 echo ==================================
 
-
-source ./.venv/bin/activate
+if [ -z "$DOCKER" ]; then
+    source ./.venv/bin/activate
+fi
 
 # Remove the users and the remote repo
 python steps/cleanup-gitlab.py
@@ -45,11 +46,14 @@ rm -rf ./weather-zh
 rm ./.gitlab-project-data.json
 
 # Remove traces of the virtual environment
-deactivate
-rm -rf ./.venv
+if [ -z "$DOCKER" ]; then
+    deactivate
+    rm -rf ./.venv
+fi
 
-# Finally remove the used gitlab instance from known hosts
-#sed -i .bak '/'$(echo $GITLAB_URL | sed -e 's/http:\/\///')'/d' ~/.ssh/known_hosts
-#rm ~/.ssh/known_hosts.bak
+if ! [ -z "$DOCKER" ]; then
+    # Finally remove the known_hosts
+    rm ~/.ssh/known_hosts
+fi
 
 echo Demo project was cleaned up successfully
