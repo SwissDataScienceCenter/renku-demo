@@ -5,17 +5,16 @@ RUN set -e && \
   apt-get install -y git && \
   pip install --upgrade pip
 
-WORKDIR /app/
+COPY . /app
 
-COPY requirements.txt ./
+WORKDIR /app
 
 RUN pip install -r /app/requirements.txt
 
-COPY users.json run-demo.sh cleanup.sh ./
+ENV DOCKER=1
 
-COPY steps ./steps
+CMD ["/app/run-demo.sh"]
 
-COPY demo-script ./demo-script
 
 
 
