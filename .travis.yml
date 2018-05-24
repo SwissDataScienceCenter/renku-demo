@@ -1,0 +1,19 @@
+notifications:
+  email: false
+
+sudo: required
+
+services:
+  - docker
+
+git:
+  depth: false
+
+script:
+  - docker build . -t renku/renku-demo
+
+after_success:
+  - if [[ "$TRAVIS_BRANCH" == "master" ]]; then
+      docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
+      docker push renku/renku-demo ;
+    fi
