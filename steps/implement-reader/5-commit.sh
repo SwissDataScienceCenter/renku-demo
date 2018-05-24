@@ -27,6 +27,6 @@ cp -r ../demo-script/commits/02/src ./
 cp -r ../demo-script/commits/02/notebooks ./
 git add -A .
 git commit -m "Work on Ku Data Reader"
-git push
+git push origin master
 
 pip install -e src/python/weather-ch

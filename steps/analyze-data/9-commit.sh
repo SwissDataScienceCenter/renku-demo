@@ -26,4 +26,4 @@ rm -r notebooks
 cp -r ../demo-script/commits/04/notebooks ./
 git add notebooks
 git commit -m "Work on Ku Analyze Data"
-git push
+git push origin master

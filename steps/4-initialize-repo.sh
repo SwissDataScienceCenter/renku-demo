@@ -18,14 +18,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+# If we're inside a container we set the git username and email before
+# initiating the project to avoid warnings.
+if ! [ -z "$DOCKER" ]; then
+    git config --global user.email $PRIMARY_USER_EMAIL
+    git config --global user.name "$PRIMARY_USER_NAME"
+fi
+
 mkdir weather-zh
 renku init weather-zh
 cd weather-zh
 
 git commit --amend --no-edit --author="$PRIMARY_USER_NAME <$PRIMARY_USER_EMAIL>"
 
-git config user.email $PRIMARY_USER_EMAIL
-git config user.name "$PRIMARY_USER_NAME"
+if [ -z "$DOCKER" ]; then
+    git config user.email $PRIMARY_USER_EMAIL
+    git config user.name "$PRIMARY_USER_NAME"
+fi
 
 curl https://www.gitignore.io/api/macos,python,R,linux >> .gitignore
 git commit -am "Updated gitignore using gitignore.io"
