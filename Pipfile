@@ -1,0 +1,18 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+jupyter = "*"
+matplotlib = "*"
+notebook = "*"
+numpy = "*"
+pandas = "*"
+renku = {git = "https://github.com/SwissDataScienceCenter/renku-python.git", editable = true, ref = "master"}
+seaborn = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.6"
