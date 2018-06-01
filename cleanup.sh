@@ -34,7 +34,7 @@ echo GitLab sudo token: $GITLAB_SUDO_TOKEN
 echo ==================================
 
 if [ -z "$DOCKER" ]; then
-    source ./.venv/bin/activate
+    source "$(pipenv --venv)/bin/activate"
 fi
 
 # Remove the users and the remote repo

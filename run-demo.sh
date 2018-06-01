@@ -28,25 +28,17 @@ export GITLAB_SUDO_TOKEN=${GITLAB_SUDO_TOKEN:-dummy-secret}
 
 echo ==================================
 echo Using the following env variables:
-echo Keycloak URL: $KEYCLOAK_URL
-echo Keycloak admin user: $KEYCLOAK_ADMIN_USER
-echo Keycloak admin password: $KEYCLOAK_ADMIN_PASSWORD
-echo GitLab URL: $GITLAB_URL
-echo GitLab sudo token: $GITLAB_SUDO_TOKEN
+echo KEYCLOAK_URL: $KEYCLOAK_URL
+echo KEYCLOAK_ADMIN_USER: $KEYCLOAK_ADMIN_USER
+echo KEYCLOAK_ADMIN_PASSWORD: $KEYCLOAK_ADMIN_PASSWORD
+echo GITLAB_URL: $GITLAB_URL
+echo GITLAB_SUDO_TOKEN: $GITLAB_SUDO_TOKEN
 echo ==================================
 
 if [ -z "$DOCKER" ]; then
     bash steps/1-check-packages.sh
-
-    # If the necessary software is around, we create a new virtualenv, activate it and install the requirements.
-    virtualenv -p python3 .venv
-    source ./.venv/bin/activate
-    echo -n Installing python packages...
-    pip install -q -r requirements.txt
-    echo done.
+    source "$(pipenv --venv)/bin/activate"
 fi
-
-
 
 if ! [ -z "$DOCKER" ]; then
     mkdir .ssh
