@@ -2,7 +2,7 @@ FROM python:3.6-slim
 
 RUN set -e && \
   apt-get update && \
-  apt-get install -y git && \
+  apt-get install -y git curl && \
   pip install --upgrade pip && \
   apt-get clean
 
