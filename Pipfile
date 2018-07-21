@@ -4,13 +4,7 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-jupyter = "*"
-matplotlib = "*"
-notebook = "*"
-numpy = "*"
-pandas = "*"
-renku = {git = "https://github.com/SwissDataScienceCenter/renku-python.git", editable = true, ref = "master"}
-seaborn = "*"
+renku = {editable = true, ref = "master", git = "https://github.com/SwissDataScienceCenter/renku-python.git"}
 
 [dev-packages]
 
