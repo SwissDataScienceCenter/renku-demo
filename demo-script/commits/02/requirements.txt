@@ -1,0 +1,7 @@
+jupyter
+matplotlib
+notebook
+numpy
+pandas
+-e src/python/weather-ch
+seaborn

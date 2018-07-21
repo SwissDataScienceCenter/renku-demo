@@ -1,5 +1,3 @@
-#!/usr/bin/env bash
-
 # -*- coding: utf-8 -*-
 #
 # Copyright 2017-2018 - Swiss Data Science Center (SDSC)
@@ -18,21 +16,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-set -e
+import re, os
 
-cd weather-zh
-
-cp ../demo-script/commits/02/README.md ./
-# Note that we overwrite the existing (empty) requirements.txt here.
-cp ../demo-script/commits/02/requirements.txt ./
-# Uncomment and adapt source code line in Dockerfile
-sed -i -e 's/\# COPY src \/code\/src/COPY src .\/src/' ./Dockerfile
-
-cp -r ../demo-script/commits/02/src ./
-cp -r ../demo-script/commits/02/notebooks ./
-
-git add -A .
-git commit -m "Work on Ku Data Reader"
-git push origin master
-
-pip install -e src/python/weather-ch
+print(re.search(r'https?://([^\/]*)', os.environ['GITLAB_URL']).group(1))

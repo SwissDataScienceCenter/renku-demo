@@ -21,3 +21,35 @@ and adapted in `users.json`.
 from your gitlab instance.
 If you want to build your image locally (for example because you want to change the pre-configured
 users in users.json), run `docker build . -t renku/renku-demo`
+
+### Running demo against any renku instance
+Exmaples:
+- `docker run -it --rm --network host \`<br> 
+   `-e GITLAB_URL=http://$(minikube ip)/gitlab \`<br> 
+   `-e KEYCLOAK_URL=http://$(minikube ip)  \`<br> 
+   `renku/renku-demo:latest`
+
+- `docker run -it --rm --network host \`<br> 
+   `-e GITLAB_URL=https://staging.testing.datascience.ch/gitlab \`<br> 
+   `-e KEYCLOAK_URL=https://staging.testing.datascience.ch  \`<br> 
+   `-e KEYCLOAK_ADMIN_USER=admin \`<br> 
+   `-e KEYCLOAK_ADMIN_PASSWORD=<get-from-values.yaml> \`<br> 
+   `-e GITLAB_SUDO_TOKEN=<get-from-values.yaml>  \`<br> 
+   `renku/renku-demo:latest`
+   
+### Run demo as k8s pod
+Examples:
+- `kubectl run renku-demo -it \`<br> 
+  `--env="GITLAB_URL=http://$(minikube ip)/gitlab" \`<br> 
+  `--env="KEYCLOAK_URL=http://$(minikube ip)"  \`<br> 
+  `--image=renku/renku-demo:latest  \`<br> 
+  `--restart=Never;`<br>
+  `kubectl delete pod renku-demo`
+
+- `kubectl run renku-demo -it \`<br> 
+  `--env="GITLAB_URL=http://$(minikube ip)/gitlab" \`<br> 
+  `--env="KEYCLOAK_URL=http://$(minikube ip)"  \`<br> 
+  `--image=renku/renku-demo:latest  \`<br> 
+  `--restart=Never \`<br> 
+  `-- /app/cleanup.sh;`<br> 
+  `kubectl delete pod renku-demo`
