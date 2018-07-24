@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "359ef0fefb4d7d2e644d5d6f98fe13909b61ad468a0fb927b47cb9cc6092de57"
+            "sha256": "b8b1cabc5756a940cf0e5f6c0516f145a58d167fe16eef10405253de0a738420"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -56,6 +56,7 @@
                 "sha256:29f99fc6125fbc931b758dc053b3114e55c77a6e4c6c3a2674a2dc986016381d",
                 "sha256:f15516df478d5a56180fbf80e68f206010e6d160fc39fa508b65e035fd75130b"
             ],
+            "index": "pypi",
             "version": "==6.7"
         },
         "click-plugins": {
@@ -213,7 +214,7 @@
         "renku": {
             "editable": true,
             "git": "https://github.com/SwissDataScienceCenter/renku-python.git",
-            "ref": "59f5e1aa2a1eaeb04d1993c53a89cd2702ce6c9d"
+            "ref": "5ab1f38971580913bfe74718d78552759299ec8c"
         },
         "requests": {
             "hashes": [
@@ -274,7 +275,7 @@
                 "sha256:24b66882f5f7aaedcd46b4669322e88d639d46c6ce4679ae7f397bbe4fe9a529",
                 "sha256:eb2b989cf03ffc7166339eb34f1aa26c5ace255243337b1e22dab7caa1166687"
             ],
-            "markers": "os_name == 'posix'",
+            "markers": "python_version < '4' and python_version != '3.0.*' and python_version != '3.2.*' and python_version >= '2.6' and python_version != '3.1.*'",
             "version": "==3.5.2"
         },
         "tabulate": {
@@ -297,7 +298,7 @@
                 "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
                 "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
             ],
-            "markers": "python_version != '3.0.*' and python_version < '4' and python_version >= '2.6' and python_version != '3.3.*' and python_version != '3.1.*' and python_version != '3.2.*'",
+            "markers": "python_version < '4' and python_version != '3.0.*' and python_version != '3.2.*' and python_version != '3.3.*' and python_version >= '2.6' and python_version != '3.1.*'",
             "version": "==1.23"
         },
         "werkzeug": {

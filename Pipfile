@@ -5,6 +5,7 @@ name = "pypi"
 
 [packages]
 renku = {editable = true, ref = "master", git = "https://github.com/SwissDataScienceCenter/renku-python.git"}
+click = "*"
 
 [dev-packages]
 
