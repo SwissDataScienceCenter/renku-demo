@@ -16,6 +16,23 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import re, os
+import re
+import os
+import click
+from builtins import AttributeError
 
-print(re.search(r'https?://([^\/]*)', os.environ['GITLAB_URL']).group(1))
+@click.command()
+@click.option('--output', required=True, help='Choose the desired output (\'ssh_port\' or \'host_name\').')
+def parse_env_variables(output):
+    if output == 'ssh_port':
+        try:
+            print(re.search(r'\:([0-9]{1,})\/', os.environ['REMOTE_REPO_URL']).group(1))
+        except AttributeError:
+            print(22)
+    elif output == 'host_name':
+        print(re.search(r'https?://([^\/]*)', os.environ['GITLAB_URL']).group(1))
+    else:
+        print('Unknown output option: {}'.format(output))
+
+if __name__ == '__main__':
+    parse_env_variables()

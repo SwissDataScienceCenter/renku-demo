@@ -47,8 +47,8 @@ git add .
 git commit -m "Added readme"
 
 if ! [ -z "$DOCKER" ]; then
-    export GITLAB_PORT=$(python ../utils/get_ssh_port.py)
-    export GITLAB_HOST=$(python ../utils/get_host_name.py)
+    export GITLAB_PORT=$(python ../utils/parse_env_variables.py --output ssh_port)
+    export GITLAB_HOST=$(python ../utils/parse_env_variables.py --output host_name)
 
     ssh-keyscan -p $GITLAB_PORT $GITLAB_HOST >> ~/.ssh/known_hosts
 fi
