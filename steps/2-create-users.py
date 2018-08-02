@@ -108,7 +108,8 @@ for user in users:
     )
 
     if response.status_code == 200:
-        user['keycloak_id'] = response.json()[0]['id']
+        keycloak_user_id = response.json()[0]['id']
+        user['keycloak_id'] = keycloak_user_id
     else:
         print('\nCan not find user {0} in keycloak'.format(user['username']))
         print(response.text)
@@ -163,7 +164,7 @@ for user in users:
             'username': user['username'],
             'email': user['email'],
             'name': user['name'],
-            'extern_uid': user['username'],
+            'extern_uid': keycloak_user_id,
             'provider': 'oauth2_generic',
             'skip_confirmation': True,
             'reset_password': False,
