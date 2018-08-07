@@ -30,7 +30,7 @@ def parse_env_variables(output):
         except AttributeError:
             print(22)
     elif output == 'host_name':
-        print(re.search(r'https?://([^\/]*)', os.environ['GITLAB_URL']).group(1))
+        print(re.search(r'https?://([^\/:]*)', os.environ['GITLAB_URL']).group(1))
     else:
         print('Unknown output option: {}'.format(output))
 
