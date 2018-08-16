@@ -11,7 +11,8 @@ COPY . /app
 WORKDIR /app
 
 RUN pip install pipenv && \
-    pipenv install --system
+    pipenv install --system && \
+    pip install -e ./demo-script/commits/03/src/python/weather-ch
 
 ENV DOCKER=1
 
