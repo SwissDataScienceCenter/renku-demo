@@ -41,14 +41,14 @@ for user in users:
         print('Aborting...\n')
         exit(1)
 
-    for user in response.json():
+    for user_to_delete in response.json():
         deletion_response = requests.delete(
-            gitlab_url + '/api/v4/users/{0}'.format(user['id']),
+            gitlab_url + '/api/v4/users/{0}'.format(user_to_delete['id']),
             params={'hard_delete': True},
             headers=headers
         )
         if deletion_response.status_code >= 300:
-            print('\nProblem deleting user {0}'.format(user['username']))
+            print('\nProblem deleting user {0}'.format(user_to_delete['username']))
             print(response.text)
             print('Aborting...\n')
             exit(1)
