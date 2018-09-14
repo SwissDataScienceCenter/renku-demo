@@ -41,7 +41,20 @@ projects = requests.get(
 
 for project_data in projects:
     if project_data['name'] == 'weather-zh':
-        print('\nProject already created.')
+        print('\nProject already created, unprotecting master branch.')
+
+        # Unprotect master branch
+        response = requests.put(
+            gitlab_url + '/api/v4/projects/{0}/repository/branches/master/unprotect'.format(project_data['id']),
+            headers=headers
+        )
+
+        if response.status_code != 200:
+            print('\nProblem unprotecting master branch of existing project.')
+            print(response.text)
+            print('Aborting...\n')
+            exit(1)
+
         break
 else:
     project_data = {

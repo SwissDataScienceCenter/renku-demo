@@ -54,4 +54,4 @@ if ! [ -z "$DOCKER" ]; then
 fi
 
 git remote add origin $REMOTE_REPO_URL
-git push --set-upstream origin master
+git push -f --set-upstream origin master
