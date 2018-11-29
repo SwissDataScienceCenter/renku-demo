@@ -20,4 +20,9 @@ set -e
 
 # Push image to dockerhub
 docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD ;
-docker push renku/renku-demo ;
+if [[ -n $TRAVIS_TAG ]]; then
+    docker tag renku/renku-demo:latest renku/renku-demo:${TRAVIS_TAG}
+    docker push renku/renku-demo:${TRAVIS_TAG}
+else
+    docker push renku/renku-demo ;
+fi

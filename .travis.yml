@@ -13,8 +13,14 @@ script:
   - docker build . -t renku/renku-demo
 
 deploy:
-  - provider: script
+  - &script
+    provider: script
     skip_cleanup: true
     script: bash travis-deploy.sh
-    on:
+    on: &script_on
       branch: master
+      repo: SwissDataScienceCenter/renku-demo
+  - <<: *script
+    on:
+      <<: *script_on
+      tags: true
