@@ -1,8 +1,10 @@
 FROM python:3.6
 
 RUN set -e && \
+  curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh -o /tmp/script.deb.sh && \
   apt-get update && \
-  apt-get install -y git curl && \
+  bash /tmp/script.deb.sh && \
+  apt-get install -y git curl git-lfs && \
   pip install --upgrade pip && \
   apt-get clean
 

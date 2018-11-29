@@ -28,6 +28,7 @@ fi
 mkdir weather-zh
 renku init weather-zh
 cd weather-zh
+git lfs install --local
 
 git commit --amend --no-edit --author="$PRIMARY_USER_NAME <$PRIMARY_USER_EMAIL>"
 
