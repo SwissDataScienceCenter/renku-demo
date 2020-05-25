@@ -1,3 +1,5 @@
+**DEPRECATION NOTICE: This project is outdated an unmaintained. Please check out the [Renku first steps tutorial](https://renku.readthedocs.io/en/latest/tutorials/01_firststeps.html) for a step-by-step guide on how to manually create a meaningful Renku project. For testing existing deployments check out the current version of the [Renku acceptance tests](https://github.com/SwissDataScienceCenter/renku/tree/master/tests).**
+
 # Renku demo
 
 This repo includes instructions to create a repeatable demo of the renku
